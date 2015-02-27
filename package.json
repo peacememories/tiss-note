@@ -1,0 +1,17 @@
+{
+  "name": "tiss-note",
+  "title": "TISS Note",
+  "id": "jid1-uODhXnUv827icA@jetpack",
+  "description": "Add notes to TISS courses",
+  "author": "Algobat",
+  "license": "MPL 2.0",
+  "version": "0.0.1",
+  "main": "./lib/main.js",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-webpack": "^1.2.0",
+    "jsx-loader": "^0.12.2",
+    "react": "^0.12.2",
+    "webpack": "^1.6.0"
+  }
+}
