@@ -1,12 +1,25 @@
 var React = require('react')
 var NoteStore = require('./note_store.js')
 
+function getNoteState(lvaId) {
+    return {
+        note: NoteStore.get(lvaId) || '',
+        changed: false
+    }
+}
+
 var Notepad = React.createClass({
     getInitialState: function() {
-        return {
-            note: NoteStore[this.props.lvaId],
-            changed: false
-        }
+        return getNoteState(this.props.lvaId)
+    },
+    _onDataChange: function() {
+        this.setState(getNoteState(this.props.lvaId))
+    },
+    componentDidMount: function() {
+        NoteStore.registerListener(this._onDataChange)
+    },
+    componentWillUnmount: function() {
+        NoteStore.unregisterListener(this._onDataChange)
     },
     handleChange: function(e) {
         this.setState({
@@ -16,13 +29,12 @@ var Notepad = React.createClass({
     },
     save: function(e) {
         NoteStore.save(this.props.lvaId, this.state.note)
-        this.setState({changed: false})
         e.stopPropagation()
     },
     render: function() {
         var buttonText = this.state.changed ? 'Save' : 'Saved'
         return <span {...this.props}>
-            <textarea onChange={this.handleChange}>{this.state.note}</textarea>
+            <textarea onChange={this.handleChange} value={this.state.note} />
             <button
                 onClick={this.save}
                 disabled={!this.state.changed}
