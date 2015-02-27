@@ -1,5 +1,6 @@
 var React = require('react/addons')
 var Notepad = require('./notepad.jsx')
+var NoteStore = require('./note_store.js')
 
 var NoteButton = React.createClass({
     getInitialState: function() {
@@ -15,8 +16,13 @@ var NoteButton = React.createClass({
             'closed': !this.state.open
         })
         return <span className='note-container'>
-            <a onClick={this.toggleNotepad}><img src=''/></a>
-            <Notepad className={classes} lvaId={this.props.lvaId} />
+            <a onClick={this.toggleNotepad}><img
+                src={NoteStore.image}
+                alt='Notes' />
+            </a>
+            <Notepad
+                className={classes}
+                lvaId={this.props.lvaId} />
         </span>
     }
 })

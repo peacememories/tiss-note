@@ -7,4 +7,6 @@ NoteStore.save = function(lvaId, note) {
     })
 }
 
+NoteStore.image = global.window.self.options.image
+
 module.exports = NoteStore
