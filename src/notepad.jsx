@@ -14,18 +14,21 @@ var Notepad = React.createClass({
             changed: true
         })
     },
-    save: function() {
-        NoteStore.save(this.opts.lvaId, this.state.note)
+    save: function(e) {
+        NoteStore.save(this.props.lvaId, this.state.note)
         this.setState({changed: false})
-        return false
+        e.stopPropagation()
     },
     render: function() {
         var buttonText = this.state.changed ? 'Save' : 'Saved'
-        return <form onSubmit={this.save}>
+        return <span {...this.props}>
             <textarea onChange={this.handleChange}>{this.state.note}</textarea>
-            <input type='Submit' readOnly
-            disabled={!this.state.changed} value={buttonText} />
-        </form>
+            <button
+                onClick={this.save}
+                disabled={!this.state.changed}
+                type='button'
+            >{buttonText}</button>
+        </span>
     }
 })
 
