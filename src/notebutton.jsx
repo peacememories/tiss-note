@@ -10,6 +10,8 @@ var NoteButton = React.createClass({
         this.setState({open: !this.state.open})
     },
     render: function() {
+        var greybox = <span onClick={this.toggleNotepad} className='greybox' />
+
         var classes = React.addons.classSet({
             'notepad': true,
             'open': this.state.open,
@@ -20,6 +22,7 @@ var NoteButton = React.createClass({
                 src={NoteStore.image}
                 alt='Notes' />
             </a>
+            {this.state.open ? greybox : undefined}
             <Notepad
                 className={classes}
                 lvaId={this.props.lvaId} />
