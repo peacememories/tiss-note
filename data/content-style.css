@@ -1,0 +1,24 @@
+.note-container {
+    position: relative;
+}
+
+.notepad {
+    position: absolute;
+    top: 1em; right: 1em;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+    z-index: 20;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border: black solid 1px;
+}
+
+.notepad.closed {
+    display: none;
+}
+
+.notepad > button, .notepad > textarea {
+    margin-right: 0 !important;
+}

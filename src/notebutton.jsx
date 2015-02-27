@@ -14,7 +14,7 @@ var NoteButton = React.createClass({
             'open': this.state.open,
             'closed': !this.state.open
         })
-        return <span>
+        return <span className='note-container'>
             <a onClick={this.toggleNotepad}><img src=''/></a>
             <Notepad className={classes} lvaId={this.props.lvaId} />
         </span>
