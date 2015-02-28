@@ -1,5 +1,5 @@
-var React = require('react')
-var Notebutton = require('./notebutton.jsx')
+var riot = require('riot')
+require('./notebutton.tag')
 
 var forEach = Array.prototype.forEach;
 
@@ -10,15 +10,16 @@ function(tr) {
     var refLink = tr.querySelector(".favoritesTitleCol a");
     var courseNumber = refLink.searchParams.get("courseNr");
     var actionBar = tr.querySelector(".favoritesActionCol2");
-    var child = document.createElement('span');
-    actionBar.appendChild(child);
-    React.render(<Notebutton lvaId={courseNumber} />, child)
-    elements.push(child)
+    var container = document.createElement('span')
+    container.className = 'note-container'
+    actionBar.appendChild(container)
+    riot.mount(container, 'notebutton', {lvaid: courseNumber})
+    elements.push(container)
+
 });
 
 global.window.self.port.on("detach", function() {
     elements.forEach(function(element) {
-      React.unmountComponentAtNode(element)
       element.parentNode.removeChild(element)
     })
 });

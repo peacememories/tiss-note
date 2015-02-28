@@ -1,4 +1,4 @@
-.greybox {
+.overlay.shown {
   opacity: 0.5;
   background-color: gray;
   position: fixed;
