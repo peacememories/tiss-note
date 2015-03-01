@@ -1,13 +1,23 @@
 {
   "name": "tiss-note",
   "title": "TISS Note",
-  "id": "jid1-uODhXnUv827icA@jetpack",
+  "id": "jid1-uODhXnUv827icA@algobat.at",
   "description": "Add notes to TISS courses",
   "author": "Algobat",
   "license": "MPL 2.0",
   "version": "0.0.1",
   "main": "./lib/main.js",
+  "preferences": [
+    {
+      "name": "syncNotes",
+      "title": "Synchronize Notes",
+      "description": "Synchronize the course notes over Firefox Sync",
+      "type": "bool",
+      "value": false
+    }
+  ],
   "devDependencies": {
+    "flux": "^2.0.1",
     "gulp": "^3.8.11",
     "gulp-webpack": "^1.2.0",
     "jsx-loader": "^0.12.2",

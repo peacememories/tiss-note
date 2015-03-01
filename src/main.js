@@ -1,5 +1,6 @@
 var riot = require('riot')
 require('./notebutton.tag')
+require('./connector.js')
 
 var forEach = Array.prototype.forEach;
 
