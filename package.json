@@ -24,6 +24,7 @@
     "react": "^0.12.2",
     "riot": "^2.0.11",
     "riotjs-loader": "^1.1.3",
-    "webpack": "^1.6.0"
+    "webpack": "^1.6.0",
+    "cfx": "git://github.com/peacememories/node-cfx.git"
   }
 }
