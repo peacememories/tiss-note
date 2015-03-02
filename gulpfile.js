@@ -60,7 +60,7 @@ gulp.task('lib', function() {
 
 gulp.task('build', ['lib', 'content-scripts'], function() {
     ncp('data', 'build/data')
-    ncp('package.json', 'build/package.json')
+    ncp('src/package.json', 'build/package.json')
 })
 
 gulp.task('run', ['build'], function(cb) {
