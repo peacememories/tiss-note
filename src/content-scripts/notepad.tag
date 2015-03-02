@@ -2,7 +2,7 @@ var Dispatcher = require('./dispatcher.js')
 var NoteStore = require('./note_store.js')
 var NotesChanged = require('../messages/notes_changed.js')
 <notepad>
-    <textarea name='noteInput' oninput={onInput}>{note}</textarea>
+    <textarea name='noteInput' oninput={onInput} value={note} />
     <button onclick={save} type='button'>{buttonMessage()}</button>
     <script>
         this.note = NoteStore.get(opts.lvaid)
