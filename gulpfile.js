@@ -71,3 +71,13 @@ gulp.task('run', ['build'], function(cb) {
     child.stderr.pipe(process.stderr)
     child.on('close', cb)
 })
+
+gulp.task('xpi', ['build'], function(cb) {
+    var child = cfx.xpi({
+        dir: __dirname + '/build',
+        pkgdir: __dirname + '/build'
+    })
+    child.stdout.pipe(process.stdout)
+    child.stderr.pipe(process.stderr)
+    child.on('close', cb)
+})
