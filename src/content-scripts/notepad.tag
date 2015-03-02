@@ -1,5 +1,6 @@
 var Dispatcher = require('./dispatcher.js')
 var NoteStore = require('./note_store.js')
+var NotesChanged = require('../messages/notes_changed.js')
 <notepad>
     <textarea name='noteInput' oninput={onInput}>{note}</textarea>
     <button onclick={save} type='button'>{buttonMessage()}</button>
@@ -22,15 +23,14 @@ var NoteStore = require('./note_store.js')
 
         save() {
             this.changed = false
-            Dispatcher.dispatch({
-                type: 'notes_changed',
-                notes: [
+            Dispatcher.dispatch(
+                NotesChanged([
                     {
                         courseId: opts.lvaid,
                         note: this.noteInput.value
                     }
-                ]
-            })
+                ])
+            )
         }
 
         NoteStore.on('notes_changed', this.onChange)

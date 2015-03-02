@@ -1,5 +1,6 @@
 var data = require('sdk/self').data
 var pageMod = require('sdk/page-mod')
+var NotesChanged = require('./messages/notes_changed.js')
 
 var Storage = require('./storage.js')
 
@@ -17,12 +18,11 @@ pageMod.PageMod({
       image: data.url('note-image.png')
     },
     onAttach: function(worker) {
-        worker.port.emit('message', {
-            type: 'notes_changed',
-            notes: Storage.getAll()
-        })
+        worker.port.emit('message', NotesChanged(
+            Storage.getAll()
+        ))
         worker.port.on('message', function(payload) {
-            if(payload.type == 'notes_changed') {
+            if(NotesChanged.isInstance(payload)) {
                 payload.notes.forEach(function(noteObj) {
                     Storage.set(noteObj.courseId, noteObj.note)
                 })

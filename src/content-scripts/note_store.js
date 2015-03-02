@@ -1,5 +1,6 @@
 var Dispatcher = require('./dispatcher.js')
 var observable = require('riot').observable
+var NotesChanged = require('../messages/notes_changed.js')
 
 var notes = {}
 
@@ -14,7 +15,7 @@ NoteStore.get = function(courseNum) {
 }
 
 NoteStore.id = Dispatcher.register(function(payload) {
-    if(payload.type == 'notes_changed') {
+    if(NotesChanged.isInstance(payload)) {
         payload.notes.forEach(function(noteObj) {
             notes[noteObj.courseId] = noteObj.note
         })
