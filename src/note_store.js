@@ -17,6 +17,10 @@ NoteStore.getAll = function() {
         })
 }
 
+NoteStore.getRaw = function() {
+    return ss.storage.notes
+}
+
 NoteStore.id = Dispatcher.register(function(payload) {
     if(NotesChanged.isInstance(payload)) {
         payload.notes.forEach(function(noteObj) {
