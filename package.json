@@ -6,16 +6,6 @@
   "author": "Algobat",
   "license": "MPL 2.0",
   "version": "0.0.1",
-  "main": "./lib/main.js",
-  "preferences": [
-    {
-      "name": "syncNotes",
-      "title": "Synchronize Notes",
-      "description": "Synchronize the course notes over Firefox Sync",
-      "type": "bool",
-      "value": false
-    }
-  ],
   "devDependencies": {
     "cfx": "git://github.com/peacememories/node-cfx.git",
     "flux": "^2.0.1",
