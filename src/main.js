@@ -1,25 +1,32 @@
-var riot = require('riot')
-require('./notebutton.tag')
+var data = require('sdk/self').data
+var pageMod = require('sdk/page-mod')
 
-var forEach = Array.prototype.forEach;
+var Storage = require('./storage.js')
 
-var elements = []
-
-forEach.call(document.querySelectorAll("table tbody tr"),
-function(tr) {
-    var refLink = tr.querySelector(".favoritesTitleCol a");
-    var courseNumber = refLink.searchParams.get("courseNr");
-    var actionBar = tr.querySelector(".favoritesActionCol2");
-    var container = document.createElement('span')
-    container.className = 'note-container'
-    actionBar.appendChild(container)
-    riot.mount(container, 'notebutton', {lvaid: courseNumber})
-    elements.push(container)
-
-});
-
-global.window.self.port.on("detach", function() {
-    elements.forEach(function(element) {
-      element.parentNode.removeChild(element)
-    })
+pageMod.PageMod({
+    include: "https://tiss.tuwien.ac.at/education/favorites.xhtml*",
+    contentScriptFile: [
+    data.url("favorites.js")
+    ],
+    contentStyleFile: [
+    data.url("content-style.css")
+    ],
+    contentScriptWhen: "ready",
+    attachTo: ["existing", "top"],
+    contentScriptOptions: {
+      image: data.url('note-image.png')
+    },
+    onAttach: function(worker) {
+        worker.port.emit('message', {
+            type: 'notes_changed',
+            notes: Storage.getAll()
+        })
+        worker.port.on('message', function(payload) {
+            if(payload.type == 'notes_changed') {
+                payload.notes.forEach(function(noteObj) {
+                    Storage.set(noteObj.courseId, noteObj.note)
+                })
+            }
+        })
+    }
 });
